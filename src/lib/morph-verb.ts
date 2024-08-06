@@ -47,7 +47,7 @@ export const morphVerb = (tense: Tense, person: Person, verb: Verb) => {
     } else if (Person.vosotrosYou === person) {
       morphEnding(isAr ? 'ais' : isEr ? 'eis' : 'iss??');
     } else assertUnreachable(person);
-  } else if (Tense.future === tense) {
+    // } else if (Tense.future === tense) {
   } else assertUnreachable(tense);
 
   if (isBasicMorph) {

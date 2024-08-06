@@ -6,3 +6,5 @@ export enum Person {
   nosotrosWe = 'nosotros',
   vosotrosYou = 'vosotros',
 }
+
+export const persons = <Person[]>Object.values(Person);
