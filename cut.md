@@ -101,6 +101,38 @@ export const morphVerb = (tense: Tense, person: Person, verb: Verb) => {
 
   return result;
 };
+
+
+export const processVerbList = (verbs: string[]) =>
+  verbs.reduce(
+    (acc, val) => {
+      const verb = new Verb(val);
+      acc[val] = tenses.flatMap((tense) =>
+        persons.map(
+          (person) => `(${tense}) ${person}: ${morphVerb(tense, person, verb)}`,
+        ),
+      );
+
+      return acc;
+    },
+    <Record<string, string[]>>{},
+  );
+
+
+const doStuff = async () => {
+  const verbList: string[] = JSON.parse(
+    fs.readFileSync('verbs.json', { encoding: 'utf8' }),
+  );
+
+  const processedList = processVerbList(verbList);
+
+  fs.writeFileSync(
+    'morphed-verbs.json',
+    JSON.stringify(processedList, undefined, 2),
+    { encoding: 'utf8' },
+  );
+};
+
 ```
 
 
