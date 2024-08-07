@@ -4,10 +4,10 @@ export class Verb {
   readonly base: string;
   readonly ending: string;
 
-  constructor(readonly gerund: string) {
-    const match = gerund.match(verbRegExp);
+  constructor(readonly infinitive: string) {
+    const match = infinitive.match(verbRegExp);
 
-    if (!match) throw new Error(`Failed to parse ${gerund}`);
+    if (!match) throw new Error(`Failed to parse ${infinitive}`);
 
     this.base = match[1];
     this.ending = match[2];

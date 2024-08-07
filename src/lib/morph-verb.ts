@@ -6,7 +6,7 @@ import { assertUnreachable } from './assert-unreachable';
 export const morphVerb = (tense: Tense, person: Person, verb: Verb) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { base, isAr, isEr, isIr, isErIr } = verb;
-  let { ending, gerund: result } = verb;
+  let { ending, infinitive: result } = verb;
   let isBasicMorph = true;
 
   const morphEnding = (val: string) => {
@@ -31,21 +31,21 @@ export const morphVerb = (tense: Tense, person: Person, verb: Verb) => {
     } else if (Person.nosotrosWe === person) {
       morphEnding(isAr ? 'amos' : isEr ? 'emos' : 'imos');
     } else if (Person.vosotrosYou === person) {
-      morphEnding(isAr ? 'ais' : isEr ? 'eis' : 'iss??');
+      morphEnding(isAr ? 'aís' : isEr ? 'eis' : 'ís');
     } else assertUnreachable(person);
   } else if (Tense.past === tense) {
     if (Person.yoMe === person) {
       morphEnding('é');
     } else if (Person.tuYou === person) {
-      morphEnding('ó');
+      morphEnding(isAr ? 'aste' : 'iste');
     } else if (Person.elEllaHeShe === person) {
-      morphEnding(isAr ? 'a' : 'e');
+      morphEnding('ó');
     } else if (Person.ellosEllasThey === person) {
-      morphEnding(isAr ? 'an' : 'en');
+      morphEnding(isAr ? 'aron' : 'ieron');
     } else if (Person.nosotrosWe === person) {
-      morphEnding(isAr ? 'amos' : isEr ? 'emos' : 'imos');
+      morphEnding(isAr ? 'amos' : 'imos');
     } else if (Person.vosotrosYou === person) {
-      morphEnding(isAr ? 'ais' : isEr ? 'eis' : 'iss??');
+      morphEnding(isAr ? 'asteis' : 'isteis');
     } else assertUnreachable(person);
     // } else if (Tense.future === tense) {
   } else assertUnreachable(tense);
