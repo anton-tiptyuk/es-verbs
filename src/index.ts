@@ -1,22 +1,20 @@
-import * as fs from 'fs';
-import { processVerbList } from './lib/process-verb-list';
+import { morphVerbList } from './morphing';
 
-const doStuff = async () => {
-  const verbList: string[] = JSON.parse(
-    fs.readFileSync('verbs.json', { encoding: 'utf8' }),
-  );
+// const [, , command, ...rest] = process.argv;
+const [, , command] = process.argv;
 
-  const processedList = processVerbList(verbList);
-
-  fs.writeFileSync(
-    'morphed-verbs.json',
-    JSON.stringify(processedList, undefined, 2),
-    { encoding: 'utf8' },
-  );
+const handlers = {
+  [morphVerbList.name]: morphVerbList,
 };
 
 (async () => {
-  await doStuff();
+  const handler = handlers[command];
+  if (!handler) {
+    console.log(`Unknown command '${command}'`);
+    return;
+  }
+
+  await handler();
 })().catch((ex) => {
   console.error('Exception caught', ex);
 });

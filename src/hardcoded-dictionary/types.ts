@@ -1,5 +1,5 @@
-import { Person } from '../lib/person';
-import { Tense } from '../lib/tense';
+import { Person } from '../morphing/person';
+import { Tense } from '../morphing/tense';
 
 export type VerbDescriptor = Partial<
   Record<Tense, Partial<Record<Person, string>>>
