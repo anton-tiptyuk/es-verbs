@@ -1,9 +1,17 @@
+import { hardcodedDictionary } from '../hardcoded-dictionary';
+
 import { Verb } from './verb';
 import { Person } from './person';
 import { Tense } from './tense';
 import { assertUnreachable } from './assert-unreachable';
 
 export const morphVerb = (tense: Tense, person: Person, verb: Verb) => {
+  const hardcodedResult = ((hardcodedDictionary[verb.infinitive] || {})[
+    tense
+  ] || {})[person];
+
+  if (hardcodedResult) return hardcodedResult;
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { base, isAr, isEr, isIr, isErIr } = verb;
   let { ending, infinitive: result } = verb;
