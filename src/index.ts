@@ -1,3 +1,4 @@
+import { jehleIndex } from './jehle';
 import { morphVerbList } from './morphing';
 
 // const [, , command, ...rest] = process.argv;
@@ -5,6 +6,7 @@ const [, , command] = process.argv;
 
 const handlers = {
   [morphVerbList.name]: morphVerbList,
+  [jehleIndex.name]: jehleIndex,
 };
 
 (async () => {
