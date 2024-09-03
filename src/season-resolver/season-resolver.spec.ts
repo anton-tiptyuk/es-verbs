@@ -16,8 +16,12 @@ describe('season resolver', () => {
       return resolver['lookupItems'];
     };
 
-    it('validates entry presence', () => {
-      expect(() => subject(undefined)).toThrow('Seasons are required');
+    it('works for undefined entities', () => {
+      expect(subject(undefined)).toBeUndefined();
+    });
+
+    it('works for blank entities', () => {
+      expect(subject([])).toBeUndefined();
     });
 
     it('should filter wrong months and days', () => {

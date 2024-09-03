@@ -16,10 +16,12 @@ const formatFromMonthAndDay = (month: number | string, day: number | string) =>
   String(month).padStart(2, '0') + '-' + String(day).padStart(2, '0');
 
 export class SeasonResolver {
+  readonly hasItems: boolean = false;
+
   private readonly lookupItems: Item[];
 
   constructor(entries: ISeasonEntry[]) {
-    if (!entries?.length) throw new Error('Seasons are required');
+    if (!entries?.length) return;
 
     const invalidMonthDays: string[] = [];
 
@@ -78,10 +80,13 @@ export class SeasonResolver {
       ];
     }
 
+    this.hasItems = true;
     this.lookupItems = items;
   }
 
   resolve(dtm: Date) {
+    if (!this.hasItems) return undefined;
+
     const month = dtm.getMonth() + 1;
     const day = dtm.getDate();
     const str = formatFromMonthAndDay(month, day);
